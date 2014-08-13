@@ -1,0 +1,15 @@
+时时获取价格接口：
+    接口：/api?method=ontime_price
+    参数：url,docId
+sku接口和商品详情接口：
+    接口：/api?method=ontime_sku
+    参数：url,docId, isDetail（如果设置为true，就是为了获取商品详情的）,nosku(不需要sku数据)
+    
+autofill接口：
+    接口：/allAutoFill
+    参数：keyWord=s&tourpcity=上海&hotelcity=上海&ticketpcity=上海&tuanmcity=上海
+    支持jsonp
+
+mautofill接口（wap autofill数据接口）：   
+    接口：/mautofill
+    参数：wd
