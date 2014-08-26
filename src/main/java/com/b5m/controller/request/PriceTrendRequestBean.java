@@ -7,29 +7,30 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.b5m.annotations.Jsonp;
 import com.b5m.annotations.Param;
 import com.b5m.bean.Msg;
 import com.b5m.exception.InvokeException;
-import com.b5m.service.sf1.SF1QueryService;
+import com.b5m.service.hbase.bean.PriceTrend;
+import com.b5m.service.pricetrend.PriceTrendService;
 
-@Repository("shop_item")
+@Repository("ontime_price")
 @Scope("prototype")
-public class ShopItemRequestBean extends RequestBean{
+@Jsonp
+public class PriceTrendRequestBean extends RequestBean{
 	@Param
 	private String docId;
-	
 	@Param
-	private String col;
+	private Integer day;
 	
 	@Reference(version = "0.0.1")
-	private SF1QueryService sf1Search;
-
+	private PriceTrendService priceTrendService;
+	
 	@Override
 	public Msg invoke(HttpServletRequest req) throws InvokeException {
-		if(!StringUtils.isEmpty(col)){
-			col = "b5mp";
-		}
-		return Msg.newSuccInstance(sf1Search.doGet(col, docId));
+		if(day == null) day = 90;
+		PriceTrend priceTrend = priceTrendService.singlePriceTrend(day, docId, false, null);
+		return Msg.newSuccInstance(priceTrend);
 	}
 
 	@Override

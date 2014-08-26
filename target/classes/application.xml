@@ -17,12 +17,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 	<context:property-placeholder location="classpath:config.properties"/>
-	<dubbo:application name="annotation-consumer" />
-	<dubbo:registry protocol="zookeeper" address="${zookeeper.address}" />
+    <import resource="application-api.xml" />
     <dubbo:annotation package="com.b5m.controller" />
-    
-    <dubbo:reference interface="com.b5m.service.log.LogService" version="0.0.1" id="logService"/>
-    
   	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">
 			<list>

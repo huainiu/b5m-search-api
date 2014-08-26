@@ -37,6 +37,8 @@ public class CommController {
 	@RequestMapping("/api")
 	@ResponseBody
 	public void invoke(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		req.setCharacterEncoding("UTF-8");
+		res.setCharacterEncoding("UTF-8");
 		handle(req, res);
 	}
 	
